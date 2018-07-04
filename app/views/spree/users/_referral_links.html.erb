@@ -10,8 +10,19 @@
 <br>
 <br>
 <div>
-  <dt>Referred Users</dt>
+  <dt>Store Credit</dt>
+  <dd><%= @user.display_total_available_store_credit %></dd>
+</div>
+<br>
+<div>
+  <dt>Referrals</dt>
   <dd><%= @user.referred_count%></dd>
+  <dd><%= link_to Spree.t(:details, scope: :referral), account_referral_details_path %>
+</div>
+<br>
+<div>
+  <dt>Referred Orders</dt>
+  <dd><%= @user.referred_orders_count%></dd>
   <dd><%= link_to Spree.t(:details, scope: :referral), account_referral_details_path %>
 </div>
 <br>

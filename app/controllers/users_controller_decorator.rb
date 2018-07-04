@@ -1,7 +1,8 @@
 Spree::UsersController.class_eval do
 
   prepend_before_action :affiliate_user, only: :update
-  before_action :load_referred_records, only: :referral_details
+  before_action :load_referred_users, only: :referral_details
+  before_action :load_referred_orders, only: :referral_details
 
   def referral_details
   end
@@ -25,8 +26,14 @@ Spree::UsersController.class_eval do
       end
     end
 
-    def load_referred_records
+    def load_referred_users
       @referred_records = spree_current_user.referral.referred_records.order({ created_at: :desc }).
                             page(params[:page]).per(params[:per_page] || Spree::Config[:referred_records_per_page])
     end
+
+    def load_referred_orders
+      @referred_orders = Spree::Order.where(referral_id: spree_current_user.referral.id).
+                            page(params[:page]).per(params[:per_page] || Spree::Config[:referred_records_per_page])
+    end
+
 end

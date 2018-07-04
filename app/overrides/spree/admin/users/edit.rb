@@ -10,7 +10,7 @@ Deface::Override.new(
       <%= Spree.t(:referral_stats) %>
     </h1>
   </div>
-  
+
   <table class="table" id="user-referral-stats" data-hook>
     <tr>
       <td width="30%"><%= Spree.t(:referred_by) %>:</td>
@@ -39,20 +39,6 @@ Deface::Override.new(
               <li><%= link_to order.number, edit_admin_order_path(order) %> (<%= order.state %>)</li>
             <% end %>
           <ol>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= Spree.t(:users_referred) %>:</td>
-      <td>
-        <% if @user.referred_count.zero? %>
-          <%= "No referred users yet." %>
-        <% else %>
-          <ol>
-            <% @user.referral.referred_users.each do |user| %>
-              <li><%= link_to user.email, edit_admin_user_url(user) %></li>
-            <% end %>
-          </ol>
         <% end %>
       </td>
     </tr>

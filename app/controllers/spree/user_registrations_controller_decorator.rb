@@ -1,7 +1,10 @@
 Spree::UserRegistrationsController.class_eval do
 
   before_action :check_referral_and_affiliate, only: :create
-  after_action :reset_referral_session, only: :create
+
+  # Referral benefit changed to order placement not signup
+  # after_action :reset_referral_session, only: :create
+  
   after_action :reset_affiliate_session, only: :create
 
   private

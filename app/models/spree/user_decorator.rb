@@ -9,7 +9,9 @@ Spree::User.class_eval do
   has_many :transactions, as: :commissionable, class_name: 'Spree::CommissionTransaction', dependent: :restrict_with_error
 
   after_create :create_referral
-  after_create :process_referral
+
+  # Add referral benefit based on order instead of user signup to ensure referrer receives benefit if user checks out as guest
+  # after_create :process_referral
   after_create :process_affiliate
   after_update :activate_associated_partner, if: :associated_partner_activable?
 
@@ -21,6 +23,10 @@ Spree::User.class_eval do
 
   def referred_count
     referral.referred_records.count
+  end
+
+  def referred_orders_count
+    Spree::Order.where(referral_id: self.referral.id).count
   end
 
   def referred?
@@ -37,6 +43,14 @@ Spree::User.class_eval do
 
   def associated_partner?
     !associated_partner.nil?
+  end
+
+  def referrer_eligible?(user)
+    Spree::Config[:referrer_benefit_enabled] && user.referrer_benefit_enabled
+  end
+
+  def display_total_available_store_credit
+    Spree::Money.new(total_available_store_credit, currency: Spree::Config[:currency])
   end
 
   protected
@@ -88,9 +102,7 @@ Spree::User.class_eval do
       referrer.referral_credits || Spree::Config[:referral_credits]
     end
 
-    def referrer_eligible?(user)
-      Spree::Config[:referrer_benefit_enabled] && user.referrer_benefit_enabled
-    end
+
 
     def referral_store_credit_category
       @store_credit_category ||= Spree::StoreCreditCategory.find_or_create_by(name: Spree::StoreCredit::REFERRAL_STORE_CREDIT_CATEGORY)
