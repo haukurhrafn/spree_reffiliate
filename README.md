@@ -6,7 +6,7 @@ Spree Reffiliate
 [![Code Climate](https://codeclimate.com/github/kinduff/spree_reffiliate/badges/gpa.svg)](https://codeclimate.com/github/kinduff/spree_reffiliate)
 [![Test Coverage](https://codeclimate.com/github/kinduff/spree_reffiliate/badges/coverage.svg)](https://codeclimate.com/github/kinduff/spree_reffiliate)
 
-Spree Reffiliate is a [Spree] Extension that adds the referral and affiliate features to your Spree Store. Users are going to be able to share a unique hyperlink with their friends to gain benefits and you'll be able to create affiliate campaigns through the Spree Administrator and configure it to your needs.
+Spree Reffiliate is a [Spree] Extension that adds referral and affiliate features to your Spree Store. Users can share a unique hyperlink with their friends to gain benefits and you'll be able to create affiliate campaigns through the Spree Administrator and configure it to your needs.
 
 ### Referrals
 + Each user will have a unique link associated to his account which he can use to refer other users.
