@@ -6,13 +6,13 @@ describe Spree::UserRegistrationsController, type: :controller do
   context "#create" do
     it "should add referral_code param" do
       code = 'referral-code'
-      session[:referral] = code
+      cookies[:referral] = code
       spree_post :create, { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
       expect(controller.params[:spree_user][:referral_code]).to eql(code)
     end
     it "should add affiliate_code param" do
       code = 'affiliate-code'
-      session[:affiliate] = code
+      cookies[:affiliate] = code
       spree_post :create, { spree_user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
       expect(controller.params[:spree_user][:affiliate_code]).to eql(code)
     end

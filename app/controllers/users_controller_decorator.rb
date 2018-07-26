@@ -3,6 +3,7 @@ Spree::UsersController.class_eval do
   prepend_before_action :affiliate_user, only: :update
   before_action :load_referred_users, only: :referral_details
   before_action :load_referred_orders, only: :referral_details
+  before_action :update_store_credit_currency, only: [:show, :referral_details]
 
   def referral_details
   end
@@ -15,6 +16,10 @@ Spree::UsersController.class_eval do
         @user ||= spree_current_user
         authorize! params[:action].to_sym, @user
       end
+    end
+
+    def update_store_credit_currency
+      spree_current_user.convert_store_credit_currency(current_currency)
     end
 
     def affiliate_user

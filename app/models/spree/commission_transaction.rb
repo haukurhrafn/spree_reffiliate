@@ -6,12 +6,11 @@ module Spree
 
     validate :cannot_change_commisson, :check_not_locked
 
-    before_validation :assign_commission, :evaluate_amount, on: :create
+    before_validation :assign_commission, :evaluate_amount, :assign_currency, on: :create
 
     self.whitelisted_ransackable_attributes =  %w[amount created_at commission_id]
 
     def display_total
-      currency = Spree::Config[:currency]
       Spree::Money.new(amount, { currency: currency })
     end
 
@@ -19,7 +18,8 @@ module Spree
       def assign_commission
         start_date = (created_at || Date.current).beginning_of_month.beginning_of_day
         end_date = start_date.end_of_month.beginning_of_day
-        self.commission = Spree::Commission.find_or_create_by(start_date: start_date, end_date: end_date, affiliate_id: affiliate.id)
+        currency = Spree::TransactionService.new(self).determine_currency
+        self.commission = Spree::Commission.find_or_create_by(start_date: start_date, end_date: end_date, affiliate_id: affiliate.id, currency: currency)
       end
 
       def cannot_change_commisson
@@ -28,6 +28,11 @@ module Spree
 
       def evaluate_amount
         self.amount = Spree::TransactionService.new(self).calculate_commission_amount
+        return true
+      end
+
+      def assign_currency
+        self.currency = Spree::TransactionService.new(self).determine_currency
         return true
       end
 

@@ -22,7 +22,6 @@ module Spree
     end
 
     def display_total
-      currency = Spree::Config[:currency]
       Spree::Money.new(transactions.map(&:amount).compact.sum, { currency: currency })
     end
 

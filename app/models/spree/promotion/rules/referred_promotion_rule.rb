@@ -4,7 +4,7 @@ module Spree
       class ReferredPromotionRule < Spree::PromotionRule
 
         def eligible?(order, options = {})
-          order.user and order.user.referred?
+          order.referred?
         end
 
         def applicable?(promotable)

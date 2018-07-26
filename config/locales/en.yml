@@ -3,14 +3,22 @@ en:
     affiliate_partial_path: 'app/views/spree/affiliates/'
     editing_affiliate: "Editing Affiliate:"
     listing_affiliates: 'Listing Affiliates'
+    credits_received: Store Credit Received
     new_affiliate: 'New Affiliate'
+    affiliate_orders: Affiliate Orders
+    my_affiliate_commissions: My Commissions
+    commission_amount: Commission Amount
+    commission_status: Commission Status
     promotion_rule_types:
       referred_promotion_rule:
-        name: "Referred User"
-        description: "Must be a referred user"
+        name: "Referred Order"
+        description: "Must be a referred order"
       affiliated_promotion_rule:
         name: "Affiliate User"
         description: "Must be an affiliated user"
+      one_use_per_email:
+        name: "One use per email"
+        description: "Only one use per email"
     referred_by: Referred by
     referral_code: Referral code
     referral_stats: Referral Stats
@@ -18,7 +26,10 @@ en:
     users_referred: Users referred
     referral_code_applied: Please proceed with signup to avail referral discount.
     affiliate_code_applied: Please proceed with signup to avail affiliate discount.
+    no_commissions_yet: You have no commissions yet
+    no_commission_transactions_yet: You have no commission transactions yet
     affiliate: Affiliate
+    contact: Contact Person
     referral:
       name: Referrals
       details: View details
@@ -27,7 +38,7 @@ en:
       update:
         successful: Referral settings successfully updated.
         unsuccessful: Failed to update. Cashback can not be a negative amount.
-      credits_to_be_awarded: Store Credits to be awarded
+      credits_to_be_awarded: Store Credits to be awarded (in USD)
       referral_credit_status: Give referral benefits.
     referral_mail:
       subject: Store credits awarded for successful referral.
@@ -47,10 +58,11 @@ en:
     edit_commission_rule: Edit Commission Rule
     new_commission_rule: New Commission Rule
     listing_commissions: Listing Commissions
+    coupon_only_valid_once: Coupon only valid once per user
     affiliate_mailer:
       activation_instruction_subject: Welcome, Activation Instruction
     affiliate_confirmation:
-      editing_affiliate: EDITING AFFILIATE
+      editing_affiliate: Editing Affiliate
       not_found: Affiliate Not Found
     view_details: View Details
     referred_user_details: Reffered User Details
@@ -59,4 +71,3 @@ en:
       referral_setting:
         credits_to_be_awarded: Store Credits for referral
         referral_credit_status: Referral benefit enabled
-

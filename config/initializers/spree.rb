@@ -3,4 +3,5 @@ config = Rails.application.config
 config.after_initialize do
   config.spree.promotions.rules << Spree::Promotion::Rules::ReferredPromotionRule
   config.spree.promotions.rules << Spree::Promotion::Rules::AffiliatedPromotionRule
+  config.spree.promotions.rules << Spree::Promotion::Rules::OneUsePerEmail
 end

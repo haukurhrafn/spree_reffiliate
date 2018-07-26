@@ -1,46 +1,44 @@
-<dt>Referral URL</dt>
-<dd class='col-md-6 row'>
-  <div class="input-group">
-    <input type='text' data-coupon-code=true value='<%= referral_url(@user.referral.code) %>' class='form-control' />
-    <span class="input-group-btn">
-      <button class="btn btn-primary" data-copy-coupon-code=true type="button" title='Copy to clipboard'><span class='glyphicon glyphicon-copy'></span></button>
-    </span>
+<% unless @user.associated_partner.present? %>
+  <br>
+  <dt>Friend of a Friend Referral Link</dt>
+  <dd>
+    <form class="form-inline">
+      <div class="form-group">
+        <input type='text' data-coupon-code=true value='<%= referral_url(@user.referral.code) %>' class='form-control referral-url-field' />
+        <button class="btn btn-primary btn-copylink" data-copy-coupon-code=true type="button" title='Copy referral link'><span class='glyphicon glyphicon-copy'></span></button>
+      </div>
+    </form>
+  </dd>
+  <br>
+  <br>
+  <div>
+    <dt>Available Store Credit From Referrals</dt>
+    <dd><%= @user.display_total_available_store_credit(current_currency) %></dd>
   </div>
-</dd>
-<br>
-<br>
-<div>
-  <dt>Store Credit</dt>
-  <dd><%= @user.display_total_available_store_credit %></dd>
-</div>
-<br>
-<div>
-  <dt>Referrals</dt>
-  <dd><%= @user.referred_count%></dd>
-  <dd><%= link_to Spree.t(:details, scope: :referral), account_referral_details_path %>
-</div>
-<br>
-<div>
-  <dt>Referred Orders</dt>
-  <dd><%= @user.referred_orders_count%></dd>
-  <dd><%= link_to Spree.t(:details, scope: :referral), account_referral_details_path %>
-</div>
-<br>
+  <br>
+  <div>
+    <dt>Referrals</dt>
+    <dd><%= @user.referred_count%></dd>
+    <dd><%= link_to Spree.t(:details, scope: :referral), account_referral_details_path %>
+  </div>
+  <br>
+<% end %>
 <% if @user.associated_partner.present? %>
+  <br>
   <dt>Affilate URL</dt>
   <dd class='col-md-6 row'>
-    <div class="input-group">
-      <input type='text' data-coupon-code=true value='<%= affiliate_url(@user.associated_partner.path) %>' class='form-control' />
-      <span class="input-group-btn">
-        <button class="btn btn-primary" data-copy-coupon-code=true type="button" title='Copy to clipboard'><span class='glyphicon glyphicon-copy'></span></button>
-      </span>
-    </div>
+    <form class="form-inline">
+      <div class="form-group">
+        <input type='text' data-coupon-code=true value='<%= affiliate_url(@user.associated_partner.path) %>' class='form-control referral-url-field' />
+        <button class="btn btn-primary btn-copylink" data-copy-coupon-code=true type="button" title='Copy affiliate link'><span class='glyphicon glyphicon-copy'></span></button>
+      </div>
+    </form>
   </dd>
   <br>
   <br>
   <br>
   <div>
-    <dt>Transactions Count</dt>
+    <dt>Total Affiliate Transactions</dt>
     <dd><%= @user.associated_partner.transactions.count %></dd>
   </div>
 <% end %>

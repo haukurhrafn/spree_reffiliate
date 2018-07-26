@@ -49,8 +49,27 @@ Spree::User.class_eval do
     Spree::Config[:referrer_benefit_enabled] && user.referrer_benefit_enabled
   end
 
-  def display_total_available_store_credit
-    Spree::Money.new(total_available_store_credit, currency: Spree::Config[:currency])
+  def display_total_available_store_credit(currency)
+    Spree::Money.new(total_available_store_credit, currency: currency)
+  end
+
+  def total_available_store_credit
+    store_credits.reload.to_a.sum(&:amount_remaining)
+  end
+
+  def convert_store_credit_currency(currency)
+    if self.store_credits.any?
+      self.store_credits.each do |store_credit|
+        if store_credit.currency != currency
+          conversion_ratio = Spree::StoreCreditConversionRate.find_by(currency: currency).rate / Spree::StoreCreditConversionRate.find_by(currency: store_credit.currency).rate
+          store_credit.amount = store_credit.amount * conversion_ratio
+          store_credit.amount_used = store_credit.amount_used * conversion_ratio
+          store_credit.amount_authorized = store_credit.amount_authorized * conversion_ratio
+          store_credit.currency = currency
+          store_credit.save
+        end
+      end
+    end
   end
 
   protected

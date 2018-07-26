@@ -8,6 +8,6 @@ Deface::Override.new(
 Deface::Override.new(
   virtual_path: 'spree/users/show',
   name: 'user_transactions_info',
-  insert_after: "[data-hook='account_my_orders']",
+  replace: "[data-hook='account_my_orders']",
   partial: 'spree/users/transactions'
 )
