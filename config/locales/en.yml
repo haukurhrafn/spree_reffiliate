@@ -7,6 +7,7 @@ en:
     new_affiliate: 'New Affiliate'
     affiliate_orders: Affiliate Orders
     my_affiliate_commissions: My Commissions
+    activate: Activate
     commission_amount: Commission Amount
     commission_status: Commission Status
     promotion_rule_types:
@@ -62,7 +63,7 @@ en:
     affiliate_mailer:
       activation_instruction_subject: Welcome, Activation Instruction
     affiliate_confirmation:
-      editing_affiliate: Editing Affiliate
+      editing_affiliate: Activate Affiliate
       not_found: Affiliate Not Found
     view_details: View Details
     referred_user_details: Reffered User Details
