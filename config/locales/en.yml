@@ -9,6 +9,7 @@ en:
     my_affiliate_commissions: My Commissions
     commission_amount: Commission Amount
     commission_status: Commission Status
+    preferred_currency: Preferred Payment Currency
     promotion_rule_types:
       referred_promotion_rule:
         name: "Referred Order"
