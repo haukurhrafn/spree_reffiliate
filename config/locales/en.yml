@@ -10,13 +10,14 @@ en:
     commission_amount: Commission Amount
     commission_status: Commission Status
     preferred_currency: Preferred Payment Currency
+    paypal_email: Paypal Email (if different to contact email)
     promotion_rule_types:
       referred_promotion_rule:
         name: "Referred Order"
         description: "Must be a referred order"
       affiliated_promotion_rule:
-        name: "Affiliate User"
-        description: "Must be an affiliated user"
+        name: "Affiliate Order"
+        description: "Must be an affiliated order"
       one_use_per_email:
         name: "One use per email"
         description: "Only one use per email"

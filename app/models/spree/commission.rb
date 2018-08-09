@@ -25,8 +25,8 @@ module Spree
       Spree::Money.new(transactions.map(&:amount).compact.sum, { currency: currency })
     end
 
-    def can_marked_paid?
-      !Date.current.between?(start_date, end_date)
+    def current_date_between_period?
+      Date.current.between?(start_date, end_date)
     end
 
     private
@@ -41,14 +41,16 @@ module Spree
       def eligiblity_of_dates
         if(start_date && end_date)
           errors.add(:base, Spree.t(:unsuitable_date_range, scope: :commission)) if (start_date > end_date)
-          errors.add(:base, Spree.t(:dates_ineligible, scope: :commission)) if (start_date < Time.current.beginning_of_month || end_date > Time.current.end_of_month)
+
+          # Line below commented out as error raise when trying to mark as paid
+          #errors.add(:base, Spree.t(:dates_ineligible, scope: :commission)) if (start_date < Time.current.beginning_of_month || end_date > Time.current.end_of_month)
         else
           errors.add(:base, Spree.t(:dates_ineligible, scope: :commission))
         end
       end
 
       def eligible_to_be_paid
-        errors.add(:base, Spree.t(:not_eligible, scope: [:commission, :paid])) if can_marked_paid?
+        errors.add(:base, Spree.t(:not_eligible, scope: [:commission, :paid])) if current_date_between_period?
       end
   end
 end

@@ -12,6 +12,10 @@ Spree::Order.class_eval do
     referral.present?
   end
 
+  def affiliated?
+    affiliate.present?
+  end
+
   private
     def create_commission_transaction
       register_commission_transaction(affiliate) if affiliate.present?

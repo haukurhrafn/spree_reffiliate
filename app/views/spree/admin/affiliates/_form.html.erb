@@ -33,6 +33,14 @@
         <% end %>
       </div>
 
+      <div data-hook="affiliate_paypal_email">
+        <%= f.field_container :paypal_email, class: ['form-group'] do %>
+          <%= f.label :paypal_email, Spree.t(:paypal_email) %>
+          <%= f.text_field :paypal_email, :class => 'form-control' %>
+          <%= f.error_message_on :paypal_email %>
+        <% end %>
+      </div>
+
       <div data-hook="affiliate_preferred_currency">
         <%= f.field_container :preferred_currency, class: ['form-group'] do %>
           <%= f.label :preferred_currency, Spree.t(:preferred_currency) %>
