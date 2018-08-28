@@ -2,9 +2,9 @@ module Spree::TransactionRegistrable
   extend ActiveSupport::Concern
     included do
       def register_commission_transaction(referral_source)
-        if referral_source.is_a?(Spree::Affiliate) && affiliate_commission_rule_present?(affiliate)
+        if referral_source.is_a?(Spree::Affiliate) && affiliate_commission_rule_present?(referral_source)
           self.transactions.create!(affiliate: referral_source, locked: false)
-        elsif referral_source.is_a(Spree::Referral) && referral_commission_rule_present?(referral)
+        elsif referral_source.is_a?(Spree::Referral) && referral_commission_rule_present?(referral_source)
           self.transactions.create!(referral: referral_source, locked: false)
         end
       end
