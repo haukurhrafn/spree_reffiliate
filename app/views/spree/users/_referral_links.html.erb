@@ -1,23 +1,18 @@
 <% unless @user.associated_partner.present? %>
   <br>
-  <dt>Refer a Friend Link</dt>
+  <dt>Sendu vinum þínum þessa slóð:</dt>
   <dd>
     <form class="form-inline">
       <div class="form-group">
         <input type='text' data-coupon-code=true value='<%= referral_url(@user.referral.code) %>' class='form-control referral-url-field' />
-        <button class="btn btn-primary btn-copylink" data-copy-coupon-code=true type="button" title='Copy referral link'><span class='glyphicon glyphicon-copy'></span></button>
+        <button class="btn btn-primary btn-copylink" data-copy-coupon-code=true type="button" title='Afrita slóð'><span class='glyphicon glyphicon-copy'></span></button>
       </div>
     </form>
-    <%= link_to "More information on our Refer a Friend Program", friends_path %>
+    <%= link_to "Gefðu 1000 kr. og fáðu 1000 kr.", "http://boxid.is" %>
   </dd>
   <br>
   <div>
-    <dt>Available Store Credit From Referrals</dt>
-    <dd><%= @user.display_total_available_store_credit(current_currency) %></dd>
-  </div>
-  <br>
-  <div>
-    <dt>Referrals</dt>
+    <dt>Vinaboð</dt>
     <dd><%= @user.referred_count%></dd>
     <dd><%= link_to Spree.t(:details, scope: :referral), account_referral_details_path %>
   </div>

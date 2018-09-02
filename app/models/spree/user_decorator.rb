@@ -57,21 +57,6 @@ Spree::User.class_eval do
     store_credits.reload.to_a.sum(&:amount_remaining)
   end
 
-  def convert_store_credit_currency(currency)
-    if self.store_credits.any?
-      self.store_credits.each do |store_credit|
-        if store_credit.currency != currency
-          conversion_ratio = Spree::StoreCreditConversionRate.find_by(currency: currency).rate / Spree::StoreCreditConversionRate.find_by(currency: store_credit.currency).rate
-          store_credit.amount = store_credit.amount * conversion_ratio
-          store_credit.amount_used = store_credit.amount_used * conversion_ratio
-          store_credit.amount_authorized = store_credit.amount_authorized * conversion_ratio
-          store_credit.currency = currency
-          store_credit.save
-        end
-      end
-    end
-  end
-
   protected
     def password_required?
       if new_record? && spree_roles.include?(Spree::Role.affiliate)

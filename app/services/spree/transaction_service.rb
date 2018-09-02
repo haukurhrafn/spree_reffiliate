@@ -15,12 +15,6 @@ module Spree
       end
     end
 
-    def determine_currency
-      if affiliate_commission_rule.present?
-        @currency = transaction.commissionable.try(:currency)
-      end
-    end
-
     private
 
       def initialize(transaction)

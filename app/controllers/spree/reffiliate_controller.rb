@@ -1,6 +1,7 @@
 module Spree
   class ReffiliateController < Spree::StoreController
     def referral
+      flash[:success] = Spree.t(:referral_code_applied)
       cookies[:referral] = {
         value: params[:code],
         expires: 30.days.from_now

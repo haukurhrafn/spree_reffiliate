@@ -6,11 +6,6 @@ module Spree
       def update
         Spree::Config[:referrer_benefit_enabled] = params[:referrer_benefit_enabled] == '1'
         Spree::Config[:referral_credits] = params[:referral_credits]
-        supported_currencies.each do |currency|
-          record = Spree::StoreCreditConversionRate.find_or_create_by(currency: currency.iso_code)
-          record.rate = params["#{currency}_conversion_rate"]
-          record.save
-        end
         flash[:success] = Spree.t(:successful, scope: "referral_settings.update")
         redirect_to edit_admin_referral_settings_path
       end

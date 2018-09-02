@@ -24,22 +24,7 @@ Spree::Order.class_eval do
     def create_referral_benefit
       if referral.present? && referrer_eligible?(referral.user) && purchaser_eligible?
         store_credit = create_store_credits(referral.user)
-        referral.referred_records.create(order: self, store_credit_id: store_credit.try(:id))
-      end
-    end
-
-    def convert_store_credits_currency
-      if user && user.store_credits.any?
-        user.store_credits.each do |store_credit|
-          if store_credit.currency != currency
-            conversion_ratio = Spree::StoreCreditConversionRate.find_by(currency: currency).rate / Spree::StoreCreditConversionRate.find_by(currency: store_credit.currency).rate
-            store_credit.amount = store_credit.amount * conversion_ratio
-            store_credit.amount_used = store_credit.amount_used * conversion_ratio
-            store_credit.amount_authorized = store_credit.amount_authorized * conversion_ratio
-            store_credit.currency = currency
-            store_credit.save
-          end
-        end
+        referral.referred_records.create(user: self.user, order: self, store_credit_id: store_credit.try(:id))
       end
     end
 
