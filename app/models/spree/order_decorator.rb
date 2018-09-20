@@ -31,7 +31,7 @@ Spree::Order.class_eval do
     def create_store_credits(referrer)
       referrer.store_credits.create(amount: referral_amount(referrer),
                                     category_id: referral_store_credit_category.try(:id),
-                                    created_by: Spree::User.admin.try(:first),
+                                    created_by: Spree::User.find_by(email: "sjalfvirkvinnsla@boxid.is"),
                                     currency: Spree::Config.currency)
     end
 
