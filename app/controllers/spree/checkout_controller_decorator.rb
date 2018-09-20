@@ -1,5 +1,5 @@
 Spree::CheckoutController.class_eval do
-  before_action :set_affilate_or_referral, only: [:update]
+  before_action :set_affilate_or_referral
   after_action :clear_session, only: [:update]
 
   private
